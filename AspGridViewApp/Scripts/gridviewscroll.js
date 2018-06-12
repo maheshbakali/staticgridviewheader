@@ -181,8 +181,8 @@ var GridViewScroll = /** @class */ (function () {
         this.HeaderGrid = this.HeaderFixed.appendChild(this.HeaderGrid);
         this.prepareHeaderGridRows();
         for (var i = 0; i < this.ContentGridItemRow.cells.length; i++) {
-            this.appendHelperElement(this.ContentGridItemRow.cells.item(i));
-            this.appendHelperElement(this.HeaderGridHeaderCells[i]);
+            this.appendHelperElement(this.ContentGridItemRow.cells.item(i));            
+            this.appendHelperElement(this.HeaderGridHeaderCells[i]);                        
         }
     };
     GridViewScroll.prototype.prepareHeaderGridRows = function () {
@@ -302,8 +302,12 @@ var GridViewScroll = /** @class */ (function () {
             var cgridItemCell = cgridItemRow.cells.item(0);
             var helperElement = gridItemCell.firstChild;
             helperElement.style.height = String(freezeCellHeights[i]) + "px";
-            helperElement = cgridItemCell.firstChild;
-            helperElement.style.height = String(freezeCellHeights[i]) + "px";
+
+            if (cgridItemCell != null) {
+                helperElement = cgridItemCell.firstChild;
+                helperElement.style.height = String(freezeCellHeights[i]) + "px";
+            }
+            
         }
         if (this.IsVerticalScrollbarEnabled) {
             this.ContentFreeze.style.height = String(this.Height - this.Header.offsetHeight - this.ScrollbarWidth) + "px";
@@ -370,10 +374,10 @@ var GridViewScroll = /** @class */ (function () {
     };
     GridViewScroll.prototype.appendHelperElement = function (gridItemCell) {
         var helperElement = document.createElement('div');
-        helperElement.className = "gridViewScrollHelper";
+        helperElement.className = "gridViewScrollHelper";        
         while (gridItemCell.hasChildNodes()) {
             helperElement.appendChild(gridItemCell.firstChild);
-        }
+        }                
         return gridItemCell.appendChild(helperElement);
     };
     GridViewScroll.prototype.getScrollbarWidth = function () {

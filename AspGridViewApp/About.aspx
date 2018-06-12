@@ -1,10 +1,13 @@
 ﻿<%@ Page Title="About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="About.aspx.cs" Inherits="About" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <hgroup class="title">
-        
+    <hgroup class="title">        
         <h2>Sample grid showing frozen header</h2>
-    </hgroup>    
+    </hgroup>   
+    <div>
+        <asp:DropDownList ID="ddlDays" runat="server" OnSelectedIndexChanged="ddlDays_SelectedIndexChanged"
+            AutoPostBack="true" ></asp:DropDownList>
+    </div>
 
     <div>
       
@@ -14,7 +17,8 @@
             <Columns> 
                 <asp:BoundField HeaderText="ID" DataField="ID" /> 
                 <asp:BoundField HeaderText="Name" DataField="Name" /> 
-                <asp:BoundField HeaderText="Place" DataField="Place" />                
+                <asp:BoundField HeaderText="Place" DataField="Place" />        
+                <asp:BoundField HeaderText="Code" DataField="Code" /> 
             </Columns> 
             <HeaderStyle CssClass="GridviewScrollHeader" /> 
             <RowStyle CssClass="GridviewScrollItem" /> 
@@ -23,14 +27,12 @@
 
     </div>
 
-    
-    <script type="text/javascript"> 
-
-        var gridViewScroll = null;
-        window.onload = function () {
-            gridViewScroll = new GridViewScroll({
+    <script type="text/javascript">        
+        function ddValueChanged() {
+                var gridViewScroll = null;
+                gridViewScroll = new GridViewScroll({
                 elementID: "MainContent_GridView1",
-                width: 850,
+                width: 300,
                 height: 350,
                 freezeColumn: true,
                 //freezeFooter: true,
@@ -43,8 +45,9 @@
                 }
             });
             gridViewScroll.enhance();
-        }       
+        }
 
     </script>
+
    
 </asp:Content>
